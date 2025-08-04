@@ -84,7 +84,12 @@ export const AppStateProvider = ({ children }: TAppStateProvider) => {
   }, []);
 
   return (
-    <AppStateContext.Provider value={{ cart, clearCart, addProduct, removeProduct }}>
+    <AppStateContext.Provider value={{
+       cart, 
+       clearCart,
+       addProduct, 
+       removeProduct 
+        }}>
       {children}
     </AppStateContext.Provider>
   );
