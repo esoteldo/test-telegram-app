@@ -1,0 +1,42 @@
+@import 'src/assets/styles/helpers/all';
+
+/* ====  BOTTOM NAV  ==== */
+.bottom_nav{
+  position: sticky;
+  bottom: 0px;
+  margin-left: -20px;
+  margin-right: -10px;
+  width:calc(100% + 40px);
+  margin-bottom: -20px;
+  background:#111;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  height:50px;
+  border-top:1px solid #2a2a2a;
+}
+.bottom_nav .nav_item{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100%;
+  cursor:pointer;
+  color:var(--textSoft);
+  transition:background .25s,color .25s;
+}
+.bottom_nav .nav_item.active{
+  background:#ff5e00;
+  color:#fff;
+}
+.bottom_nav svg{
+  width:24px;
+  height:24px;
+  fill:currentColor;
+}
+
+.bottom_nav i{
+  width:22px;
+  height:22px;
+  fill:currentColor;
+}

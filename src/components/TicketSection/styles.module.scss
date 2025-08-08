@@ -1,0 +1,139 @@
+@import 'src/assets/styles/helpers/all';
+
+/* ====  TICKET SECTION  ==== */
+.ticket_section {
+            background: $neutral800;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .ticket_section > p{
+          margin-top: 15px; 
+           color: #e5e7eb;
+          font-size: 0.9rem;
+        }
+        /* .ticket_section::before {
+            content: '\f3ff';
+            font-family: 'Font Awesome 7 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 65px;
+            right: calc(50% - 20px);
+            font-size: 5.5rem;
+            color: #faf612;
+            opacity: 0.9;
+        } */
+        .ticket_icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: flex;
+        
+            justify-content: center;
+            align-items: center;
+            align-self: center;
+        }
+        .ticket_icon i {
+            /* width: 50px;
+            height: 50px; */
+            position: absolute;
+            color: #faec22; /* #92400e; */
+            text-shadow: 2px 2px 4px rgba(251, 255, 0, 0.644);
+            opacity: 0.7;
+            font-size: 5.5rem;
+        }
+        .ticket_title {
+            font-size: 1.8rem;
+            color: #ff5e00; /* #92400e; */
+            margin-bottom: 20px;
+        }
+        .ticket_price {
+            z-index: 100;
+            font-size: 1.9rem;
+            font-weight: 700;
+            color:  #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.644);
+            margin-bottom: 10px;
+        }
+        .ticket_price > span {
+            font-size: 1rem;
+        }
+        .buy_ticket_btn {
+            background:  linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .buy_ticket_btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .buy_ticket_btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+        .buy_ticket_btn:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+        .buy_ticket_btn:active {
+            transform: translateY(-1px);
+        }
+        .button {
+      padding: 6px;
+    }
+    .ticket_quantity {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            margin-bottom: 20px;
+        }
+        .quantity_btn {
+            background: linear-gradient(135deg, $primary300 0%, #764ba2 100%);;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        .quantity_btn:hover {
+            background: #c0c6f7;
+            transform: scale(1.1);
+        }
+        .quantity_input {
+            width: 60px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 5px;
+            margin: 10px
+        }
+        .quantity {
+      @include subtitle-l();
+      text-align: center;
+      width: 15px;
+    }

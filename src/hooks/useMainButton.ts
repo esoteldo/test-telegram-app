@@ -17,7 +17,7 @@ export const useMainButton = ({ text, onClick, isEnabled = true }: Props) => {
       isEnabled,
       isVisible: true,
       text: text.toUpperCase(),
-      bgColor: '#0098EA',
+      bgColor: '#168ACD',
       textColor: '#ffffff',
     });
 

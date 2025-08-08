@@ -1,6 +1,6 @@
 export const MinusIcon = () => (<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g clipPath="url(#clip0_7345_39286)">
-    <path d="M3.75 12H20.25" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M3.75 12H20.25" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </g>
   <defs>
     <clipPath id="clip0_7345_39286">
@@ -9,10 +9,10 @@ export const MinusIcon = () => (<svg width="22" height="22" viewBox="0 0 24 24" 
   </defs>
 </svg>);
 
-export const PlusIcon = () => (<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const PlusIcon = () => (<svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
   <g clipPath="url(#clip0_9746_60262)">
-    <path d="M3.75 12H20.25" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M12 20.25L12 3.75" stroke="#ffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M3.75 12H20.25" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M12 20.25L12 3.75" stroke="#ffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </g>
   <defs>
     <clipPath id="clip0_9746_60262">
@@ -114,7 +114,7 @@ export const EmptyFilter = () => (
 )
 
 export const Home = () => (
-  <svg viewBox="0 0 80 80"  opacity={0.4} height="80px" width="80px" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 81 80"  opacity={0.4} height="80px" width="81px" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
     <g id="SVGRepo_iconCarrier">

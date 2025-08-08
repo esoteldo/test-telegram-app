@@ -9,10 +9,10 @@
   transition: 0.3s;
   gap: 4px;
   padding: 6px 12px;
-  background: $primary300;
+  background:linear-gradient(135deg, $primary300 0%, #764ba2 100%); /* $primary300; */
 
   &:hover:not(:disabled) {
-    background: $primary500;
+    background: linear-gradient(135deg, $primary500 0%, #633f88 100%);/* $primary500; */
   }
 
   &:active:not(:disabled) {

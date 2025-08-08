@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTonAddress, useTonConnectModal } from '@tonconnect/ui-react';
 import { useMainButton } from '@/hooks/useMainButton';
@@ -9,8 +9,12 @@ import { BottomNav} from '@/components/BottonMenu';
 
 import { useAppState } from '@/context/app-context.tsx';
 import styles from './styles.module.scss';
+import { TicketSection } from '@/components/TicketSection';
+import { PrizeSection } from '@/components/PrizesSection';
+import { CryptoPrices } from '@/components/CryptoPrices';
 
 const Main = () => {
+  const [prices, setPrices]  = useState({ btc: "0.000", eth: "0.000" });
   const navigate = useNavigate();
   const { cart, addProduct, removeProduct } = useAppState();
   const address = useTonAddress();
@@ -41,7 +45,16 @@ const Main = () => {
   return (
     <div className={styles.wrapper}>
       <Header />
+      <h1>CryptoWin</h1>
+        
+        <PrizeSection/>
+
+        <CryptoPrices prices={prices} setPrices={setPrices} />
+      
+        <TicketSection/>
+      
       {data.products.map(product => (
+        
         <ProductCard
           product={product.id in cart ? cart[product.id] : { ...product, quantity: 0 }}
           key={product.id}
