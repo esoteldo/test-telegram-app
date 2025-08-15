@@ -2,6 +2,7 @@
 
 /* ====  BOTTOM NAV  ==== */
 .bottom_nav{
+  z-index: 1000;
   position: sticky;
   bottom: 0px;
   margin-left: -20px;
