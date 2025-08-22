@@ -1,76 +1,107 @@
-import { useEffect } from "react";
+
+import { useEffect } from 'react';
 import styles from './styles.module.scss';
 import { clsx } from "clsx";
 
-const getBinancePrice = async (
-  setPrices: React.Dispatch<React.SetStateAction<{ btc: string; eth: string }>>
-) => {
-// eslint-disable-next-line prefer-const
-let btc = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@trade");
-// eslint-disable-next-line prefer-const
-let eth = new WebSocket("wss://stream.binance.com:9443/ws/ethusdt@trade"); 
-let precioBtc = 0;
-let precioEth = 0;
-btc.onmessage = (event) => {
-  const trade = JSON.parse(event.data);
- 
-    precioBtc = trade.p;
-    /* alert(`Precio BTC actualizado: ${precioBtc} USD`); */
-    setPrices((prevPrices) => ({ ...prevPrices, btc: Number(precioBtc).toFixed(2) }));
+const getBinancePrice2 = class {
+  btc: WebSocket;
+  eth: WebSocket;
+  precioBtc: number;
+  precioEth: number;
+  setBtcPrice: (precioBtc: number) => void;
+  setEthPrice: (precioEth: number) => void;
+  getBtcPrice: () => number;
+  getEthPrice: () => number;
+
+  constructor(setPrices: React.Dispatch<React.SetStateAction<{ btc: string; eth: string }>>) {
     
-};
-eth.onmessage = (event) => {
-  const trade = JSON.parse(event.data);
-   
-    precioEth = trade.p;
-   /*  alert(`Precio ETH actualizado: ${precioEth} USD`); */
-    setPrices((prevPrices) => ({ ...prevPrices, eth: Number(precioEth).toFixed(2) }));
+    // eslint-disable-next-line prefer-const
+    this.btc = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@trade");
+    // eslint-disable-next-line prefer-const
+    this.eth = new WebSocket("wss://stream.binance.com:9443/ws/ethusdt@trade");
+    this.precioBtc = 0;
+    this.precioEth = 0;
+    this.setBtcPrice = (precioBtc: number) => {
+      this.precioBtc = precioBtc;
+        
+    }
+    this.setEthPrice = (precioEth: number) => {
+      this.precioEth = precioEth;
+    }
+    this.getBtcPrice = () => this.precioBtc;
+    this.getEthPrice = () => this.precioEth;
+    
+    getBinancePrice2.getBinancePrice(this.btc, this.eth, this.setBtcPrice, this.setEthPrice);
+    getBinancePrice2.setBinancePrice(this.precioBtc, this.precioEth, setPrices);
+  }
+
   
+   static async getBinancePrice(
+    btc: WebSocket,
+    eth: WebSocket,
+    setBtcPrice: (precioBtc: number) => void,
+    setEthPrice: (precioEth: number) => void,
+  ) {
+
+    btc.onmessage = (event) => {
+      const trade = JSON.parse(event.data);
+       setBtcPrice(trade.p);
+       
+    };
+    eth.onmessage = (event) => {
+      const trade = JSON.parse(event.data);
+      setEthPrice(trade.p);
+      
+    };
+
+    btc.onerror = (error) => {
+      console.error('Error en la conexión de BTC:', error);
+      alert('Error en la conexión de BTC. Por favor, inténtalo más tarde.');
+    };
+    eth.onerror = (error) => {
+      console.error('Error en la conexión de ETH:', error);
+      alert('Error en la conexión de ETH. Por favor, inténtalo más tarde.');
+    };
+  }
+
+   static setBinancePrice(
+    precioBtc: number,
+    precioEth: number,
+    setPrices: React.Dispatch<React.SetStateAction<{ btc: string; eth: string }>>) {
+
+      setPrices({ btc: Number(precioBtc).toFixed(2), eth: Number(precioEth).toFixed(2) });
+      
+  }
+
+  getPrices(setPrices: React.Dispatch<React.SetStateAction<{ btc: string; eth: string }>>) {
+    setPrices({ btc: Number(this.precioBtc).toFixed(2), eth: Number(this.precioEth).toFixed(2) });
+    
+  }
 };
 
-btc.onerror = (error) => {
-  console.error('Error en la conexión de BTC:', error);
- alert('Error en la conexión de BTC. Por favor, inténtalo más tarde.');
-  
-};
-eth.onerror = (error) => {
-  console.error('Error en la conexión de ETH:', error);
-  alert('Error en la conexión de ETH. Por favor, inténtalo más tarde.');
-};
-
-/* const interval = setInterval(() => {
-    setPrices({ btc: precioBtc.toFixed(2), eth: precioEth.toFixed(2) });
-  console.log(`Precio BTC: ${precioBtc} USD`);
-  console.log(`Precio ETH: ${precioEth} USD`);
-}, 5000); */
-
-/* setTimeout(() => {
-  btc.close();
-  eth.close();
-  clearInterval(interval);
-  console.log('Conexiones cerradas');
-  alert('Conexiones cerradas. ');
-}, 30000); */
-
-}
 
 // CryptoPrices.jsx
 export const CryptoPrices = ({ prices, setPrices }:{prices: {btc:string, eth:string}, setPrices: React.Dispatch<React.SetStateAction<{btc:string, eth:string}>>}) => {
-  
-   /*  useEffect(() => {
-    const fetchIt = async () => {
-      const btc = 67234 + Math.random() * 200;
-      const eth = 3456 + Math.random() * 50;
-      setPrices({ btc: btc.toFixed(2), eth: eth.toFixed(2) });
-    };
-    fetchIt();
-    const id = setInterval(fetchIt, 30000);
-    return () => clearInterval(id);
-  }, [setPrices]); */
-
+  // Initialize the WebSocket connection and set up the interval for fetching prices
+ 
   useEffect(() => {
-    getBinancePrice(setPrices);
+    
+    const binancePrice = new getBinancePrice2(setPrices);
+    
+    binancePrice.getPrices(setPrices);
+     const interval = setInterval(() => {
+      binancePrice.getPrices(setPrices);
+    }, 10000);
+    
+    return () => {
+      // Cleanup function to close WebSocket connections if needed
+      binancePrice.btc.close();
+      binancePrice.eth.close();
+      clearInterval(interval);
+      alert('WebSocket connections closed');
+    };
   }, []);
+
 
   return (
     <section className={styles.crypto_prices}>
